@@ -14,9 +14,60 @@ A ready-to-run Docker setup for continuous integration (CI) projects using PHP 8
 - 🔁 `.htaccess` support with mod_rewrite enabled
 - 🗂 Live code reloading via volume mounts
 
-## Getting Started
+## 🛠 Getting Started
 
-```bash
-git clone https://github.com/yourname/ci-php-docker-stack.git
-cd ci-php-docker-stack
-docker-compose up -d --build
+1. Clone the repository
+
+    git clone https://github.com/yourname/ci-php-docker-stack.git
+    cd ci-php-docker-stack
+
+2. Start the containers
+
+    docker-compose up -d --build
+
+🌐 Access URLs
+
+    Service	URL
+    App	http://localhost:8080
+    phpMyAdmin	http://localhost:8081
+
+🔐 Default Credentials
+
+    Component	  Username	Password
+    MariaDB	    ci_user	  ci_password
+    phpMyAdmin	ci_user or root	ci_password or root_password
+
+🧩 Restore Database using phpMyAdmin
+
+    You can easily import a .sql file into MariaDB using the phpMyAdmin interface:
+
+    Open http://localhost:8081 in your browser.
+
+    Log in using the credentials above.
+
+    Select the database ci_db from the left panel.
+
+    Click the Import tab.
+
+    Choose your .sql file under "File to import".
+
+    Click Go to execute the import.
+
+⚙️ Composer
+    During build, composer update is automatically run inside the /var/www/html/ams directory.
+
+    To manually run Composer in the container:
+
+    docker exec -it ci_php_app bash
+    cd /var/www/html/ams
+    composer update
+
+🧪 Useful Commands
+
+    # Rebuild everything from scratch
+    docker-compose down -v
+    docker-compose up -d --build
+
+# Login to containers
+    docker exec -it ci_php_app bash
+    docker exec -it mariadb mysql -u root -p
