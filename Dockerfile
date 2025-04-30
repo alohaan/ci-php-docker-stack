@@ -17,8 +17,7 @@ RUN apt-get update && apt-get install -y \
     git \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
     && docker-php-ext-install -j$(nproc) \
-    pdo \
-    pdo_mysql \
+    mysqli \
     intl \
     gd \
     zip \
@@ -31,11 +30,7 @@ COPY apache-custom.conf /etc/apache2/sites-available/000-default.conf
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-
-
 # Copy Composer from official Composer image
-
-
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Set working directory
