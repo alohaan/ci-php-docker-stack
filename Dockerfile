@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
     && docker-php-ext-install -j$(nproc) \
     mysqli \
+    pdo \
+    pdo_mysql \
     intl \
     gd \
     zip \
